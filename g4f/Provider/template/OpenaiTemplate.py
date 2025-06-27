@@ -53,7 +53,7 @@ class OpenaiTemplate(AsyncGeneratorProvider, ProviderModelMixin, RaiseErrorMixin
         model: str,
         messages: Messages,
         proxy: str = None,
-        timeout: int = 120,
+        timeout: int = 600, # 600 equals to 10 minutes, original was 120 (2 minutes)
         media: MediaListType = None,
         api_key: str = None,
         api_endpoint: str = None,
