@@ -256,7 +256,7 @@ class LegacyLMArena(AsyncGeneratorProvider, ProviderModelMixin):
             # Try to fetch models from Google Storage first
             url = "https://storage.googleapis.com/public-arena-no-cors/p2l-explorer/data/overall/arena.json"
             import requests
-            response = requests.get(url, timeout=5)
+            response = requests.get(url, timeout=60)
             response.raise_for_status()
             data = response.json()
             leaderboard_models = [model[0] for model in data.get("leaderboard", [])]
@@ -603,7 +603,7 @@ class LegacyLMArena(AsyncGeneratorProvider, ProviderModelMixin):
                             
                             # Add timeout for response
                             try:
-                                async with asyncio.timeout(30):  # 30 second timeout
+                                async with asyncio.timeout(600):  # 30 second timeout
                                     async for chunk in read_response(response):
                                         count += 1
                                         has_content = True
@@ -662,7 +662,7 @@ class LegacyLMArena(AsyncGeneratorProvider, ProviderModelMixin):
                             has_content = False
                             
                             try:
-                                async with asyncio.timeout(30):
+                                async with asyncio.timeout(600):
                                     async for chunk in read_response(response):
                                         count += 1
                                         has_content = True
